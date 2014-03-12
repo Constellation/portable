@@ -26,7 +26,8 @@ You need to setup script languages environment on the each machines.
 And I sometimes would like to construct commands based on C++ libraries,
 such as LLVM.
 
-NOTE: LLVM can be built as static library. So it is possible to bundle LLVM
+**NOTE:**
+LLVM can be built as static library. So it is possible to bundle LLVM
 libraries to one executable file.
 
 ### Why don't you write it with golang?
@@ -142,6 +143,25 @@ But as you may know, you can build native executables not depending on them. You
 
 Then g++ produces a executable not depending on the above libraries. You can ensure it by executing `ldd {name}`.
 So moving it to the other platform, it works correctly if OS, ARCH, BIT are the same.
+
+**NOTE:**
+Without `-static` option, `ldd a.out` result may be the following.
+```
+$ ldd a.out
+        linux-vdso.so.1 =>  (0x00007fff799fe000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f67bd054000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f67bcc8c000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f67bc987000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f67bd383000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f67bc771000)
+```
+First, `linux-vdso.so.1` is contained in the linux kernel (Linux Virtual Dynamic Shared Objects).
+So it isn't needed as a shared library.
+And since `libstdc++.so.6`, `libc.so.6`, `libm.so.6`, `libgcc_s.so.1` and `/lib64/ld-linux-x86-64.so.2` are placed with the
+same name in a lot of Linux distributions. So if you don't worry about the edge case, `-static` is not necessary.
+Compiled binary is basically works on the other Linux system.
+But of cource, the other libraries should be linked statically.
+[This](http://stackoverflow.com/questions/4156055/gcc-static-linking-only-some-libraries) shows how to control linking with libraries.
 
 ### Cross compiling the 32 / 64 bit 
 
