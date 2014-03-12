@@ -26,6 +26,9 @@ You need to setup script languages environment on the each machines.
 And I sometimes would like to construct commands based on C++ libraries,
 such as LLVM.
 
+NOTE: LLVM can be built as static library. So it is possible to bundle LLVM
+libraries to one executable file.
+
 ### Why don't you write it with golang?
 
 As the same as the above.
@@ -119,8 +122,8 @@ ARCH="$(uname -m | sed -e s/i.86/x86/ -e s/x86_64/x86/ -e s/amd64/x86/ \
 BIT="$(getconf LONG_BIT)"
 COMMAND="${0}-${OS}-${ARCH}-${BIT}"
 
-if [ -e $COMMAND ]; then
-    exec $COMMAND
+if [ -e "$COMMAND" ]; then
+    exec "$COMMAND"
 else
     echo "Command ${COMMAND} not found."
     echo "Unsupported architecture ${OS} ${ARCH} ${BIT}"
@@ -140,10 +143,10 @@ But as you may know, you can build native executables not depending on them. You
 Then g++ produces a executable not depending on the above libraries. You can ensure it by executing `ldd {name}`.
 So moving it to the other platform, it works correctly if OS, ARCH, BIT are the same.
 
-
-### Cross compiling the Linux 32 / 64 bit 
+### Cross compiling the 32 / 64 bit 
 
 Just googled and found the [article](http://aaronbonner.io/post/14969163463/cross-compiling-to-32bit-with-gcc) and [this](http://stackoverflow.com/questions/4643197/missing-include-bits-cconfig-h-when-cross-compiling-64-bit-program-on-32-bit).
+Especially, the latter article works correctly on my environment (Ubuntu 13.10, FreeBSD 10)
 
 ## Result
 
@@ -151,4 +154,4 @@ So I've created the sample project `portable` to test it. It includes the above 
 (Windows 32bit, OSX 64bit, Linux 32bit, Linux 64bit. Their architecture is x86)
 
 So just copying (or git clone) it and append this directory to the PATH,
-you can *sync*, *execute* this command on the (almost) all platforms.
+you can *sync*, *execute*, *publish* this command on the (almost) all platforms.
