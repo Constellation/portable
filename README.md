@@ -155,11 +155,10 @@ $ ldd a.out
         /lib64/ld-linux-x86-64.so.2 (0x00007f67bd383000)
         libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f67bc771000)
 ```
-First, `linux-vdso.so.1` is contained in the linux kernel (Linux Virtual Dynamic Shared Objects).
-So it isn't needed as a shared library.
+Since `linux-vdso.so.1` is contained in the linux kernel (Linux Virtual Dynamic Shared Objects), it isn't required as a shared library.
 And since `libstdc++.so.6`, `libc.so.6`, `libm.so.6`, `libgcc_s.so.1` and `/lib64/ld-linux-x86-64.so.2` are placed with the
-same name in a lot of Linux distributions. So if you don't worry about the edge case, `-static` is not necessary.
-Compiled binary is basically works on the other Linux system.
+same name in a lot of Linux distributions. So if you don't worry about the edge cases, `-static` for system libraries is not necessary.
+Compiled binaries basically work on the other Linux systems.
 But of cource, the other libraries should be linked statically.
 [This](http://stackoverflow.com/questions/4156055/gcc-static-linking-only-some-libraries) shows how to control linking with libraries.
 
