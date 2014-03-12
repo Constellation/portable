@@ -134,7 +134,7 @@ fi
 So placing {name}-Linux-x86-64 in the same directory to this script,
 you can make command available on Linux x64 environment.
 
-### Building executable -static option
+### Building executable with -static option
 
 Native executables (built by g++, clang or so) usually depends on libc, libgcc, libcompiler-rt, libsup++, libc++ and so on.
 But as you may know, you can build native executables not depending on them. You can use `-static` option.
@@ -158,7 +158,7 @@ $ ldd a.out
 Since `linux-vdso.so.1` is contained in the linux kernel (Linux Virtual Dynamic Shared Objects), it isn't required as a shared library.
 And since `libstdc++.so.6`, `libc.so.6`, `libm.so.6`, `libgcc_s.so.1` and `/lib64/ld-linux-x86-64.so.2` are placed with the
 same name in a lot of Linux distributions. So if you don't worry about the edge cases, `-static` for system libraries is not necessary.
-Compiled binaries basically work on the other Linux systems.
+Compiled binaries basically work on the other Linux systems. For example, `ldd ninja-linux64` shows the same result.
 But of cource, the other libraries should be linked statically.
 [This](http://stackoverflow.com/questions/4156055/gcc-static-linking-only-some-libraries) shows how to control linking with libraries.
 
