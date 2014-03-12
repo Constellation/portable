@@ -2,7 +2,7 @@
 
 ## Abstract (in 10 seconds)
 
-By investigating Ninja & Chromium depot\_tools approach, I'll
+By investigating [Ninja](https://github.com/martine/ninja) & Chromium [depot\_tools](https://chromium.googlesource.com/chromium/tools/depot_tools.git/) approach, I'll
 introduce the way to mobile your C++ executable for (almost) all platforms.
 
 ## Introduction
