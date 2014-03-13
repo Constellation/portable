@@ -1,5 +1,7 @@
 # How to publish native executables for (almost) all platforms
 
+[blogged article](http://constellation.hatenablog.com/entry/2014/03/14/013729)
+
 **NOTE:**
 If you find some bugs, please inform me :)
 
