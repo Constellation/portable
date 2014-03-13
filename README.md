@@ -199,7 +199,7 @@ Especially, the latter article works correctly on my environment (Ubuntu 13.10, 
 
 ## Result
 
-So I've created the sample project `portable` to test it. It includes the above script and executables.
+So I've created the sample project [portable](https://github.com/Constellation/portable) to test it. It includes the above script and executables.
 (Windows 32bit, OSX 64bit, Linux 32bit, Linux 64bit. Their architecture is x86)
 
 So just copying (or git clone) it and append this directory to the PATH,
