@@ -161,6 +161,8 @@ same name in a lot of Linux distributions. So if you don't worry about the edge 
 Compiled binaries basically work on the other Linux systems. For example, `ldd ninja-linux64` shows the same result.
 But of cource, the other libraries should be linked statically.
 [This](http://stackoverflow.com/questions/4156055/gcc-static-linking-only-some-libraries) shows how to control linking with libraries.
+By following the way described in that article, we can control which libraries are linked statically.
+It's possible to link system libraries as dynamic and the others as static.
 
 ### Building executables on OSX
 
