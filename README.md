@@ -134,7 +134,7 @@ fi
 So placing {name}-Linux-x86-64 in the same directory to this script,
 you can make command available on Linux x64 environment.
 
-### Building executable with -static option
+### Building executables with -static option (Linux and FreeBSD)
 
 Native executables (built by g++, clang or so) usually depends on libc, libgcc, libcompiler-rt, libsup++, libc++ and so on.
 But as you may know, you can build native executables not depending on them. You can use `-static` option.
@@ -161,6 +161,34 @@ same name in a lot of Linux distributions. So if you don't worry about the edge 
 Compiled binaries basically work on the other Linux systems. For example, `ldd ninja-linux64` shows the same result.
 But of cource, the other libraries should be linked statically.
 [This](http://stackoverflow.com/questions/4156055/gcc-static-linking-only-some-libraries) shows how to control linking with libraries.
+
+### Building executables on OSX
+
+However, `-static` option doesn't work on OSX. According to the `man gcc`.
+
+```
+This option will not work on Mac OS X unless all libraries (including libgcc.a) have also been compiled with -static.
+Since neither a static version of libSystem.dylib nor crt0.o are provided, this option is not useful to most people.
+```
+
+So if you build with `-static` (e.g. `clang++ portable.cc -static`), you may get the following error.
+
+```
+ld: library not found for -lcrt0.o
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+This is also described on [this article](http://stackoverflow.com/questions/3801011/ld-library-not-found-for-lcrt0-o-on-osx-10-6-with-gcc-clang-static-flag).
+
+But don't worry about that. Since OSX environment layout is limited, basically dynamically linked system library is placed on appropriate sites. You can see dynamic linked libraries on the binary by `otool -L executable`. For example,
+
+```
+portable-Darwin-x86-64:
+    /usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 120.0.0)
+    /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1197.1.1)
+```
+
+So in this time, we just build executables as `name-Darwin-x86-64` and place it.
 
 ### Cross compiling the 32 / 64 bit 
 
