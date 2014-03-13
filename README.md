@@ -1,5 +1,8 @@
 # How to publish native executables for (almost) all platforms
 
+**NOTE:**
+If you find some bugs, please inform me :)
+
 ## Abstract (in 10 seconds)
 
 By investigating [Ninja](https://github.com/martine/ninja) & Chromium [depot\_tools](https://chromium.googlesource.com/chromium/tools/depot_tools.git/) approach, I'll
